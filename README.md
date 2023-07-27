@@ -4,7 +4,7 @@ Welcome to DESignSolvents, the machine learning platform for predicting the prop
 
 Deep eutectic solvents are developing as a promising alternative to traditional solvents; however, it can be challenging to forecast their properties using conventional techniques. Our platform offers a fast, reliable, and cost-effective solution, enabling researchers and industry professionals to make informed decisions about the use of deep eutectic solvents. We are constantly expanding the database and improving our models to ensure that they provide the most accurate predictions.
 
-![image](https://github.com/Odegova-Valerie/DESignSolvents/assets/101416592/6f6896f1-5f40-4f55-8337-e4771ab12aea)
+![image](https://github.com/Odegova-Valerie/DESignSolvents/assets/101416592/262c4415-cdbe-4e0e-bf3f-d84d66aadb10)
 
 
 
