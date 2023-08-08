@@ -50,7 +50,7 @@ def f_get_PMI1(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI1(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI1(mol) # Calculating descriptors
     except:
         return None
     return res
@@ -67,7 +67,7 @@ def f_get_PMI2(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI2(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI2(mol) # Calculating descriptors
     except:
         return None
     return res
@@ -85,7 +85,7 @@ def f_get_PMI3(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI3(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI3(mol) # Calculating descriptors
     except:
         return None
     return res
