@@ -50,7 +50,7 @@ def f_get_PMI1(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI1(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI1(mol) #Calculation of descriptors
     except:
         return None
     return res
@@ -67,7 +67,7 @@ def f_get_PMI2(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI2(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI2(mol) #Calculation of descriptors
     except:
         return None
     return res
@@ -85,7 +85,7 @@ def f_get_PMI3(smiles):
     flag = AllChem.EmbedMultipleConfs(mol, 10, ps)
     AllChem.MMFFOptimizeMoleculeConfs(mol)
     try:
-        res = Descriptors3D.PMI3(mol) #Вычисление дескриптора
+        res = Descriptors3D.PMI3(mol) #Calculation of descriptors
     except:
         return None
     return res
@@ -117,7 +117,7 @@ ind_comp_df = ind_comp_df.join(pd.DataFrame(Mol_descriptors, columns = desc_name
 # Function for adding molecular descriptors
 def RDKit_descriptors(smiles):
   mols = [Chem.MolFromSmiles(i) for i in smiles] #Getting a list of molecules
-  calc = MoleculeDescriptors.MolecularDescriptorCalculator(x[0] for x in Descriptors._descList if x[0] in ['Topological Torsions', 'HeavyAtomCount', 'NumHAcceptors', 'NumHDonors', 'NumHeteroatoms', 'NumRotatableBonds', 'NumValenceElectrons', 'RingCount']) #Выбор дескрипторов из листа_
+  calc = MoleculeDescriptors.MolecularDescriptorCalculator(x[0] for x in Descriptors._descList if x[0] in ['Topological Torsions', 'HeavyAtomCount', 'NumHAcceptors', 'NumHDonors', 'NumHeteroatoms', 'NumRotatableBonds', 'NumValenceElectrons', 'RingCount']) #Selecting descriptors from a sheet_
   desc_names = calc.GetDescriptorNames() #Getting Descriptor Names
   Mol_descriptors = [] #Blank list to fill with descriptor values
   for mol in mols:
@@ -254,7 +254,7 @@ for desc in Descr_list:
 
 # Replace None in column X#3 (molar fraction) with 0 for correct calculations
 density_df['X#3 (molar fraction)'] = density_df['X#3 (molar fraction)'].replace(np.nan, 0)
-Desc_list_new = ['Molecular weight', 'HeavyAtomCount', 'NumHAcceptors', 'NumHDonors', 'NumHeteroatoms', 'NumRotatableBonds', 'RingCount']+ Elements_List1 #Список дескрипторов
+Desc_list_new = ['Molecular weight', 'HeavyAtomCount', 'NumHAcceptors', 'NumHDonors', 'NumHeteroatoms', 'NumRotatableBonds', 'RingCount']+ Elements_List1 #List of descriptors
 #Averaging descriptors
 for desc in Desc_list_new:
   density_df[desc] = density_df[desc + '#' + '1'] * density_df['X#1 (molar fraction)'] + density_df[desc + '#' + '2'] * density_df['X#2 (molar fraction)'] + density_df[desc + '#' + '3'] * density_df['X#3 (molar fraction)']
