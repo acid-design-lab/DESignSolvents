@@ -6,19 +6,19 @@ Deep eutectic solvents (DESs) have emerged as a promising eco-friendly alternati
 
 
 ## Sections
-1. DataBases
+1. **DataBases**
   Each folder contains databases containing the values of the physico-chemical properties of deep eutectic solvents. As well as databases for machine learning,   which contain all the descriptors used to predict the properties of DES
 
-2. DataAnalysis
+2. **DataAnalysis**
    In these notebooks, the primary processing of the database takes place: SMILES parsing, deletion of repetitions, as well as exploratory data analysis
 
-3. MiningDescriptors
+3. **MiningDescriptors**
   This file contains code for getting descriptors using RDKit, as well as using various formulas
 
-4. ML_MODELS
+4. **ML_MODELS**
    This section contains code for optimizing machine learning models and further selecting the best model. This happens by counting various metrics such as R2 and RMSE
 
-5. BEST_MODEL
+5. **BEST_MODEL**
   In these sections, the best model is presented, as well as checking it on test data. In addition, each folder contains the best trained model in pkl format
 
 
