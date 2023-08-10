@@ -1,35 +1,27 @@
 # Importing the necessary libraries
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.graph_objects as go
-import plotly.express as px
 import re
-import pubchempy as pcp
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import Descriptors3D
-from rdkit.Chem import rdchem
 from rdkit.Chem import AllChem
-from rdkit import DataStructs
 from rdkit.ML.Descriptors import MoleculeDescriptors
-from rdkit.Chem.rdchem import PeriodicTable, GetPeriodicTable
-from rdkit.Chem import Fragments
-from rdkit.Chem.rdchem import EditableMol
+from rdkit.Chem.rdchem import GetPeriodicTable
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem.Draw import IPythonConsole
-from rdkit.Chem.Draw.MolDrawing import MolDrawing, DrawingOptions
-from rdkit.Chem import PyMol
 
 
-viscosity_df = pd.read_excel('viscosity_without_rep.xlsx') #Reading the database without repetition
+
+viscosity_df = pd.read_csv('VISCOSITY/viscosity_without_rep.csv') #Reading the database without repetition
 
 # Loading the database of individual components
-ind_comp_df = pd.read_excel('individual_compounds_df_new_names.xlsx')
+ind_comp_df = pd.read_csv('VISCOSITY/individual_compounds_df_new_names.csv')
 
-
+def get_molecular_formula(smiles):
+    molecule = Chem.MolFromSmiles(smiles)
+    formula = Chem.rdMolDescriptors.CalcMolFormula(molecule)
+    return formula
 
 ### Molecular weight
 # Adding a line with the molecular weight of substances
@@ -132,7 +124,7 @@ ind_comp_df = ind_comp_df.join(pd.DataFrame(Mol_descriptors, columns = desc_name
 
 def Get_Numb_Atoms(smile):
     # We get list with elements and their number
-    MolecularFormula = pcp.get_properties('MolecularFormula', smile, 'smiles')[0]['MolecularFormula'] #Finding the molecular formula from smiles
+    MolecularFormula = get_molecular_formula(smile) #Finding the molecular formula from smiles
     chars = re.findall(r'[a-zA-Z]+', MolecularFormula) #We select all letter symbols (element designations)
     nums = re.findall(r'\d+', MolecularFormula) #We select all the digits (indexes)
     new_chars = [] #To record elements
@@ -182,6 +174,7 @@ for ind in ind_comp_df.index:
 ind_comp_df
 
 
+
 ## Van der Waals radii and volumes
 def Get_VdWVolume(smile):
     per_table = GetPeriodicTable() #Loading the periodic system
@@ -194,9 +187,9 @@ def Get_VdWVolume(smile):
     ps.useRandomCoords = True
     flag = AllChem.EmbedMultipleConfs(mol_h, 10, ps)
     AllChem.MMFFOptimizeMolecule(mol_h)
-    NB = mol_h.GetNumAtoms() #Number of bonds in a molecule
+    NB = mol_h.GetNumAtoms() - 1 + RA +  RNA #Number of bonds in a molecule
     # We get lists with elements and their number
-    MolecularFormula = pcp.get_properties('MolecularFormula', smile, 'smiles')[0]['MolecularFormula'] #Finding the molecular formula from smiles
+    MolecularFormula = get_molecular_formula(smile) #Finding the molecular formula from smiles
     chars = re.findall(r'[a-zA-Z]+', MolecularFormula) #We select all letter symbols (element designations)
     nums = re.findall(r'\d+', MolecularFormula) #We select all the digits (indexes)
     new_chars = [] #To record elements
@@ -235,12 +228,11 @@ def Get_VdWVolume(smile):
 ind_comp_df['VdWVolume, A^3'] = ind_comp_df['IsomericSMILES'].apply(Get_VdWVolume) #Applying a function to a dataframe
 
 
-viscosity_df = viscosity_df.drop(['Unnamed: 0', 'Unnamed: 0.1'], axis = 1)
+viscosity_df = viscosity_df.drop('Unnamed: 0', axis = 1)
 Elements_List1 = ['Li', 'C', 'N', 'O', 'F', 'Na', 'Mg', 'Al', 'P', 'S', 'Cl', 'K', 'Ca', 'Cr', 'Mn', 'Fe', 'Co', 'Ni', 'Cu', 'Zn', 'Br']
 ind_comp_df = ind_comp_df.drop_duplicates(['IsomericSMILES']) #Removing duplicate rows from the database if there are any
 ind_comp_df.index = ind_comp_df['IsomericSMILES'] #We use IsomericSMILES as an index
-Descr_list =  ['Molecular weight', 'Asphericity', 'Eccentricity',
-       'InertialShapeFactor', 'RadiusOfGyration', 'SpherocityIndex',
+Descr_list =  ['Molecular weight',
        'NumValenceElectrons', 'HeavyAtomCount', 'NumHAcceptors', 'NumHDonors',
        'NumHeteroatoms', 'NumRotatableBonds', 'RingCount', 'VdWVolume, A^3', 'PMI1', 'PMI2', 'PMI3'] + Elements_List1 #List of descriptors to be added
 for desc in Descr_list:
@@ -260,24 +252,6 @@ for desc in Desc_list_new:
   viscosity_df[desc] = viscosity_df[desc + '#' + '1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df[desc + '#' + '2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df[desc + '#' + '3'] * viscosity_df['X#3 (molar fraction)']
 
 
-#Asphericity
-def f_get_Asphericity_gen():
-    #Expressions for moments of inertia
-    pm1 = viscosity_df['PMI1#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI1#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI1#3'] * viscosity_df['X#3 (molar fraction)']
-    pm2 = viscosity_df['PMI2#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI2#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI2#3'] * viscosity_df['X#3 (molar fraction)']
-    pm3 = viscosity_df['PMI3#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI3#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI3#3'] * viscosity_df['X#3 (molar fraction)']
-    #Formula for Asphericity
-    return 0.5 * ((pm3-pm2)**2 + (pm3-pm1)**2 + (pm2-pm1)**2)/(pm1**2+pm2**2+pm3**2)
-
-
-#Eccentricity
-def f_get_Eccentricity_gen():
-    #Expressions for moments of inertia
-    pm1 = viscosity_df['PMI1#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI1#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI1#3'] * viscosity_df['X#3 (molar fraction)']
-    pm2 = viscosity_df['PMI2#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI2#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI2#3'] * viscosity_df['X#3 (molar fraction)']
-    pm3 = viscosity_df['PMI3#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI3#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI3#3'] * viscosity_df['X#3 (molar fraction)']
-    #Formula for Eccentricity
-    return np.sqrt(pm3**2 -pm1**2) / pm3
 
 #InertialShapeFactor
 def f_get_InertialShapeFactor_gen():
@@ -288,14 +262,6 @@ def f_get_InertialShapeFactor_gen():
     #Formula for InertialShapeFactor
     return pm2 / (pm1*pm3)
 
-#RadiusOfGyration
-def f_get_RadiusOfGyration_gen():
-    #Expressions for moments of inertia
-    pm1 = viscosity_df['PMI1#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI1#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI1#3'] * viscosity_df['X#3 (molar fraction)']
-    pm2 = viscosity_df['PMI2#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI2#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI2#3'] * viscosity_df['X#3 (molar fraction)']
-    pm3 = viscosity_df['PMI3#1'] * viscosity_df['X#1 (molar fraction)'] + viscosity_df['PMI3#2'] * viscosity_df['X#2 (molar fraction)'] + viscosity_df['PMI3#3'] * viscosity_df['X#3 (molar fraction)']
-    #Formula for RadiusOfGyration
-    return np.sqrt( 2*np.pi*pow(pm3*pm2*pm1,1/3)/viscosity_df['Molecular weight'] )
 
 #SpherocityIndex
 def f_get_SpherocityIndex_gen():
@@ -307,10 +273,8 @@ def f_get_SpherocityIndex_gen():
     return 3 * pm1 / (pm1+pm2+pm3)
 
 
-viscosity_df['Asphericity'] = f_get_Asphericity_gen()
-viscosity_df['Eccentricity'] = f_get_Eccentricity_gen()
+
 viscosity_df['InertialShapeFactor'] = f_get_InertialShapeFactor_gen()
-viscosity_df['RadiusOfGyration'] = f_get_RadiusOfGyration_gen()
 viscosity_df['SpherocityIndex'] = f_get_SpherocityIndex_gen()
 viscosity_df.head()
 
@@ -336,7 +300,7 @@ for desc in Desc_list_new:
 #Function for getting a list of elements and their number in a molecule
 def Get_Numb_Atoms(smile):
     # We get sheets with elements and their number
-    MolecularFormula = pcp.get_properties('MolecularFormula', smile, 'smiles')[0]['MolecularFormula'] #Finding the molecular formula from smiles
+    MolecularFormula = get_molecular_formula(smile) #Finding the molecular formula from smiles
     chars = re.findall(r'[a-zA-Z]+', MolecularFormula) #We select all letter symbols (element designations)
     nums = re.findall(r'\d+', MolecularFormula) #We select all the digits (indexes)
     new_chars = [] #To record elements
@@ -389,5 +353,8 @@ def Get_mass_fraction_metal(smiles):
 
 viscosity_df['Metal_frac_gen'] = (viscosity_df['X#1 (molar fraction)']*viscosity_df['isomer_smiles#1'].apply(Get_mass_fraction_metal)+viscosity_df['X#2 (molar fraction)']*viscosity_df['isomer_smiles#2'].apply(Get_mass_fraction_metal)+viscosity_df['X#3 (molar fraction)']*viscosity_df['isomer_smiles#3'].apply(Get_mass_fraction_metal))/(viscosity_df['X#1 (molar fraction)']*viscosity_df['Molecular weight#1']+viscosity_df['X#2 (molar fraction)']*viscosity_df['Molecular weight#2']+viscosity_df['X#3 (molar fraction)']*viscosity_df['Molecular weight#3'])
     
-
-pd.to_excel('viscosity_df_with_elem.xlsx')
+viscosity_ML = viscosity_df[['Component#1', 'Component#2', 'Component#3', 'X#1 (molar fraction)', 'X#2 (molar fraction)', 'X#3 (molar fraction)','I', 'II', 'III', 'IV', 'V', 
+                                     'Temperature, K', 'Viscosity, cP','isomer_smiles#1','isomer_smiles#2','isomer_smiles#3','VdWVolume, A^3#1','VdWVolume, A^3#2','VdWVolume, A^3#3',
+                                     'NumHeteroatoms','RingCount', 'InertialShapeFactor', 'SpherocityIndex', 'Metal_frac_gen'] + Elements_List1]
+viscosity_ML
+viscosity_ML.to_csv('viscosity_df_with_elem.csv')
