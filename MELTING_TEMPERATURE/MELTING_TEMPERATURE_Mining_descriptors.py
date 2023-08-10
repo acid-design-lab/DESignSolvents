@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import re
 from rdkit import Chem
 from rdkit.Chem import Descriptors
 from rdkit.Chem import AllChem
@@ -102,4 +101,4 @@ for desc in Desc_list_new:
 
 
 df = df[['Tmelt, K', 'Smiles#1', 'Smiles#2', 'Component#1', 'Component#2',	'X#1 (molar fraction)',	'X#2 (molar fraction)',	'T#1', 'T#2', 'MW', 'HBD', 'fr_Al_COO', 'fr_Ar_COO','fr_Ar_N', 'fr_Ar_OH', 'fr_NH0', 'fr_NH1', 'fr_amide', 'AROM', 'ALERTS','n_HM']]
-df.to_excel('Melt_temp_ML.xlsx')
+df.to_csv('Melt_temp_ML.csv')

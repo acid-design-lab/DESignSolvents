@@ -1351,7 +1351,7 @@ Number of components,Type of DES,Component#1,Component#2,X#1 (molar fraction),X#
 2,5,"(1R,2S,5R)-5-methyl-2-propan-2-ylcyclohexan-1-ol",decan-1-ol,0.6667,0.3333,255.23,No,10.1016/j.cej.2020.125173,CC(C)[C@@H]1CC[C@@H](C)C[C@H]1O,315.7,CCCCCCCCCCO,280.15
 2,5,5-methyl-2-propan-2-ylphenol,decan-1-ol,0.6667,0.3333,257.91,No,10.1016/j.cej.2020.125173,Cc1ccc(C(C)C)c(O)c1,323.5,CCCCCCCCCCO,280.15
 2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.898,0.102,323.256,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
-2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.796,0.264,319.427,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
+2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.736,0.264,319.427,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
 2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.694,0.306,297.405,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
 2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.601,0.399,295.81,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
 2,5,"1,3-dithiane","1,2,3,4-tetrafluoro-5,6-diiodobenzene",0.57,0.43,286.85,Yes,10.1002/anie.202110520,C1CSCSC1,327.15,Fc1c(F)c(F)c(I)c(I)c1F,324.3
@@ -1883,7 +1883,7 @@ Number of components,Type of DES,Component#1,Component#2,X#1 (molar fraction),X#
 2,5,dodecanoic acid,nonanoic acid,0.25,0.75,282,Yes,10.1021/acssuschemeng.7b04235,CCCCCCCCCCCC(=O)O,317.5,CCCCCCCCC(=O)O,285.75
 2,5,dodecanoic acid,nonanoic acid,0.143,0.857,285,Yes,10.1021/acssuschemeng.7b04235,CCCCCCCCCCCC(=O)O,317.5,CCCCCCCCC(=O)O,285.75
 2,5,1-dioctylphosphoryloctane,phenol,0.9,0.1,323.45,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
-2,5,1-dioctylphosphoryloctane,phenol,"0,8",0.2,315.95,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
+2,5,1-dioctylphosphoryloctane,phenol,0.8,0.2,315.95,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
 2,5,1-dioctylphosphoryloctane,phenol,0.7,0.3,311.85,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
 2,5,1-dioctylphosphoryloctane,phenol,0.67,0.33,309.55,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
 2,5,1-dioctylphosphoryloctane,phenol,0.6,0.4,303.45,Yes,10.1021/acssuschemeng.0c00559,CCCCCCCCP(=O)(CCCCCCCC)CCCCCCCC,426.65,Oc1ccccc1,314.15
@@ -1916,7 +1916,7 @@ Number of components,Type of DES,Component#1,Component#2,X#1 (molar fraction),X#
 2,5,2-(trimethylazaniumyl)acetate;hydrate,"propane-1,2-diol",0.331,0.669,426,Yes,10.1016/j.molstruc.2017.11.064,C[N+](C)(C)CC(=O)[O-].O,514.15,CC(O)CO,237.15
 2,5,2-(trimethylazaniumyl)acetate;hydrate,"propane-1,2-diol",0.252,0.748,405.273,Yes,10.1016/j.molstruc.2017.11.064,C[N+](C)(C)CC(=O)[O-].O,514.15,CC(O)CO,237.15
 2,5,2-(trimethylazaniumyl)acetate;hydrate,"propane-1,2-diol",0.201,0.799,411.273,Yes,10.1016/j.molstruc.2017.11.064,C[N+](C)(C)CC(=O)[O-].O,514.15,CC(O)CO,237.15
-2,5,5-methyl-2-propan-2-ylcyclohexan-1-ol,2-oxopropanoic acid,0.333,0.666,279.15,No,10.1021/acssuschemeng.0c00559,CC1CCC(C(C)C)C(O)C1,311.15,CC(=O)C(=O)O,286.95
+2,5,5-methyl-2-propan-2-ylcyclohexan-1-ol,2-oxopropanoic acid,0.334,0.666,279.15,No,10.1021/acssuschemeng.0c00559,CC1CCC(C(C)C)C(O)C1,311.15,CC(=O)C(=O)O,286.95
 2,5,2-(trimethylazaniumyl)acetate,2-hydroxybenzoic acid,0.897,0.103,534.8,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,O=C(O)c1ccccc1O,432.15
 2,5,2-(trimethylazaniumyl)acetate,2-hydroxybenzoic acid,0.796,0.204,488.8,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,O=C(O)c1ccccc1O,432.15
 2,5,2-(trimethylazaniumyl)acetate,2-hydroxybenzoic acid,0.698,0.302,444.6,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,O=C(O)c1ccccc1O,432.15
@@ -2011,7 +2011,7 @@ Number of components,Type of DES,Component#1,Component#2,X#1 (molar fraction),X#
 2,5,2-(trimethylazaniumyl)acetate,5-methyl-2-propan-2-ylphenol,0.499,0.501,359.2,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,Cc1ccc(C(C)C)c(O)c1,323.5
 2,5,2-(trimethylazaniumyl)acetate,5-methyl-2-propan-2-ylphenol,0.397,0.603,328.5,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,Cc1ccc(C(C)C)c(O)c1,323.5
 2,5,2-(trimethylazaniumyl)acetate,5-methyl-2-propan-2-ylphenol,0.099,0.901,310.9,Yes,10.1002/cssc.202001331,C[N+](C)(C)CC(=O)[O-],566,Cc1ccc(C(C)C)c(O)c1,323.5
-2,5,"1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",5-methyl-2-propan-2-ylphenol,826,0.174,259.788,Yes,10.1021/acssuschemeng.0c00559,CC12CCC(CC1=O)C2(C)C,448.15,Cc1ccc(C(C)C)c(O)c1,323.5
+2,5,"1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",5-methyl-2-propan-2-ylphenol,0.826,0.174,259.788,Yes,10.1021/acssuschemeng.0c00559,CC12CCC(CC1=O)C2(C)C,448.15,Cc1ccc(C(C)C)c(O)c1,323.5
 2,5,"1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",5-methyl-2-propan-2-ylphenol,0.756,0.244,251.167,Yes,10.1021/acssuschemeng.0c00559,CC12CCC(CC1=O)C2(C)C,448.15,Cc1ccc(C(C)C)c(O)c1,323.5
 2,5,"1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",5-methyl-2-propan-2-ylphenol,0.679,0.321,244.702,Yes,10.1021/acssuschemeng.0c00559,CC12CCC(CC1=O)C2(C)C,448.15,Cc1ccc(C(C)C)c(O)c1,323.5
 2,5,"1,7,7-trimethylbicyclo[2.2.1]heptan-2-one",5-methyl-2-propan-2-ylphenol,0.508,0.492,229.616,Yes,10.1021/acssuschemeng.0c00559,CC12CCC(CC1=O)C2(C)C,448.15,Cc1ccc(C(C)C)c(O)c1,323.5
