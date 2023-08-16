@@ -11,7 +11,7 @@ Deep eutectic solvents (DESs) have emerged as a promising eco-friendly alternati
 Each folder in this repository contains files specific to one of the three physico-chemical properties predicted in this work.
 
 ### Databases
-`CSV` files are the database of the corresponding physico-chemical property and the dataset used to train machine learning models.
+`CSV` files contain the data of the corresponding physico-chemical property and the dataset used to train machine learning models.
 
 ### Data engineering and analysis
 `DataAnalysis` notebook contains the main processing steps, such as SMILES parsing, removal of duplicates, exploratory data analysis, etc.
